@@ -5,11 +5,12 @@ pub enum Contents {
     Chat {
         sender: String,
         text: String
-    }
+    },
+    Empty
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
 pub struct Message {
-    timestamp: u64,
-    contents: Contents
+    pub timestamp: u64,
+    pub contents: Contents
 }
