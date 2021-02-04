@@ -2,9 +2,14 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
 #[cfg_attr(feature = "json-schema", derive(schemars::JsonSchema))]
-pub enum ChatReceiverType {
-    Direct,
-    Group
+pub enum ChatReceiver {
+    All,
+    Direct {
+        target: String
+    },
+    Group {
+        id: u32
+    }
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -12,8 +17,7 @@ pub enum ChatReceiverType {
 #[serde(tag = "type")]
 pub enum ClientMessage {
     Chat {
-        target: ChatReceiverType,
-        receiver: String,
+        receiver: ChatReceiver,
         text: String
     }
 }
