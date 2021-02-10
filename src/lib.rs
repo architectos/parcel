@@ -94,4 +94,5 @@ mod tests {
 
         deserialize::<ServerMessage>(&serialize(&ServerMessage::Empty {}).unwrap()).unwrap();
     }
+
 }

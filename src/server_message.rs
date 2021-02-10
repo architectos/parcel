@@ -1,15 +1,10 @@
-use serde::{Serialize, Deserialize};
-
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
-#[cfg_attr(feature = "json-schema", derive(schemars::JsonSchema))]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "json-schema", derive(schemars::JsonSchema), schemars(deny_unknown_fields))]
 pub enum ServerMessage {
-    Chat {
-        sender: String,
-        text: String
-    },
-    Empty {}
+    Chat { sender: String, text: String },
+    Empty {},
 }
 
 impl ServerMessage {
