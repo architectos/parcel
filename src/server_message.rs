@@ -9,5 +9,11 @@ pub enum ServerMessage {
         sender: String,
         text: String
     },
-    Empty
+    Empty {}
+}
+
+impl ServerMessage {
+    pub fn to_bytes(&self) -> Vec<u8> {
+        bincode::serialize(self).expect("Expected serialization of ServerMessage to be successful.")
+    }
 }
