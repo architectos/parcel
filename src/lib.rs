@@ -73,6 +73,7 @@ mod tests {
     #[test]
     fn test_server_message_serialize() -> () {
         serialize(&ServerMessage::Chat {
+            kind: server_message::ChatMessageKind::Broadcast,
             sender: String::from("hunter1"),
             text: String::from("Hello, world!"),
         })
@@ -85,6 +86,7 @@ mod tests {
     fn test_server_message_deserialize() -> () {
         deserialize::<ServerMessage>(
             &serialize(&ServerMessage::Chat {
+                kind: server_message::ChatMessageKind::Direct,
                 sender: String::from("hunter1"),
                 text: String::from("Hello, world!"),
             })
