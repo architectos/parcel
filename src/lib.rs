@@ -17,54 +17,54 @@ mod tests {
 
     #[test]
     fn test_client_message_serialize() -> () {
-        serialize(&ClientMessage::Chat {
+        serialize(&ClientMessage::Chat(client_message::ChatMessage {
             receiver: client_message::ChatReceiver::All,
             text: String::from("Hello, world!"),
-        })
+        }))
         .unwrap();
 
-        serialize(&ClientMessage::Chat {
+        serialize(&ClientMessage::Chat(client_message::ChatMessage {
             receiver: client_message::ChatReceiver::Direct {
                 target: String::from("hunter1"),
             },
             text: String::from("Hello, world!"),
-        })
+        }))
         .unwrap();
 
-        serialize(&ClientMessage::Chat {
+        serialize(&ClientMessage::Chat(client_message::ChatMessage {
             receiver: client_message::ChatReceiver::Group { id: 0 },
             text: String::from("Hello, world!"),
-        })
+        }))
         .unwrap();
     }
 
     #[test]
     fn test_client_message_deserialize() -> () {
         deserialize::<ClientMessage>(
-            &serialize(&ClientMessage::Chat {
+            &serialize(&ClientMessage::Chat(client_message::ChatMessage {
                 receiver: client_message::ChatReceiver::All,
                 text: String::from("Hello, world!"),
-            })
+            }))
             .unwrap(),
         )
         .unwrap();
 
         deserialize::<ClientMessage>(
-            &serialize(&ClientMessage::Chat {
+            &serialize(&ClientMessage::Chat(client_message::ChatMessage {
                 receiver: client_message::ChatReceiver::Direct {
                     target: String::from("hunter1"),
                 },
                 text: String::from("Hello, world!"),
-            })
+            }))
             .unwrap(),
         )
         .unwrap();
 
         deserialize::<ClientMessage>(
-            &serialize(&ClientMessage::Chat {
+            &serialize(&ClientMessage::Chat(client_message::ChatMessage {
                 receiver: client_message::ChatReceiver::Group { id: 0 },
                 text: String::from("Hello, world!"),
-            })
+            }))
             .unwrap(),
         )
         .unwrap();
