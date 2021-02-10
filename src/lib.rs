@@ -4,67 +4,65 @@ pub use serde;
 #[cfg(feature = "json-schema")]
 pub use schemars;
 
-pub mod client_message;
-pub use client_message::ClientMessage;
+pub mod client_frame;
+pub use client_frame::ClientFrame;
 
-pub mod server_message;
-pub use server_message::ServerMessage;
+pub mod server_frame;
+pub use server_frame::ServerFrame;
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use bincode::{deserialize, serialize};
+    use client_frame::Movement;
 
     #[test]
     fn test_client_message_serialize() -> () {
-        serialize(&ClientMessage::Chat(client_message::ChatMessage {
-            receiver: client_message::ChatReceiver::All,
-            text: String::from("Hello, world!"),
-        }))
+        serialize(&ClientFrame {
+            messages: vec![client_frame::ChatMessage {
+                receiver: client_frame::ChatReceiver::Broadcast,
+                text: String::from("Hello, world!"),
+            }],
+            movement: Movement::default(),
+        })
         .unwrap();
 
-        serialize(&ClientMessage::Chat(client_message::ChatMessage {
-            receiver: client_message::ChatReceiver::Direct {
-                target: String::from("hunter1"),
-            },
-            text: String::from("Hello, world!"),
-        }))
-        .unwrap();
-
-        serialize(&ClientMessage::Chat(client_message::ChatMessage {
-            receiver: client_message::ChatReceiver::Group { id: 0 },
-            text: String::from("Hello, world!"),
-        }))
+        serialize(&ClientFrame {
+            messages: vec![client_frame::ChatMessage {
+                receiver: client_frame::ChatReceiver::Direct {
+                    target: String::from("hunter2"),
+                },
+                text: String::from("Hello, world!"),
+            }],
+            movement: Movement::default(),
+        })
         .unwrap();
     }
 
     #[test]
     fn test_client_message_deserialize() -> () {
-        deserialize::<ClientMessage>(
-            &serialize(&ClientMessage::Chat(client_message::ChatMessage {
-                receiver: client_message::ChatReceiver::All,
-                text: String::from("Hello, world!"),
-            }))
+        deserialize::<ClientFrame>(
+            &serialize(&ClientFrame {
+                messages: vec![client_frame::ChatMessage {
+                    receiver: client_frame::ChatReceiver::Broadcast,
+                    text: String::from("Hello, world!"),
+                }],
+                movement: Movement::default(),
+            })
             .unwrap(),
         )
         .unwrap();
 
-        deserialize::<ClientMessage>(
-            &serialize(&ClientMessage::Chat(client_message::ChatMessage {
-                receiver: client_message::ChatReceiver::Direct {
-                    target: String::from("hunter1"),
-                },
-                text: String::from("Hello, world!"),
-            }))
-            .unwrap(),
-        )
-        .unwrap();
-
-        deserialize::<ClientMessage>(
-            &serialize(&ClientMessage::Chat(client_message::ChatMessage {
-                receiver: client_message::ChatReceiver::Group { id: 0 },
-                text: String::from("Hello, world!"),
-            }))
+        deserialize::<ClientFrame>(
+            &serialize(&ClientFrame {
+                messages: vec![client_frame::ChatMessage {
+                    receiver: client_frame::ChatReceiver::Direct {
+                        target: String::from("hunter2"),
+                    },
+                    text: String::from("Hello, world!"),
+                }],
+                movement: Movement::default(),
+            })
             .unwrap(),
         )
         .unwrap();
@@ -72,29 +70,28 @@ mod tests {
 
     #[test]
     fn test_server_message_serialize() -> () {
-        serialize(&ServerMessage::Chat {
-            kind: server_message::ChatMessageKind::Broadcast,
-            sender: String::from("hunter1"),
-            text: String::from("Hello, world!"),
+        serialize(&ServerFrame {
+            messages: vec![server_frame::ChatMessage {
+                kind: server_frame::ChatMessageKind::Broadcast,
+                sender: String::from("hunter1"),
+                text: String::from("Hello, world!"),
+            }],
         })
         .unwrap();
-
-        serialize(&ServerMessage::Empty {}).unwrap();
     }
 
     #[test]
     fn test_server_message_deserialize() -> () {
-        deserialize::<ServerMessage>(
-            &serialize(&ServerMessage::Chat {
-                kind: server_message::ChatMessageKind::Direct,
-                sender: String::from("hunter1"),
-                text: String::from("Hello, world!"),
+        deserialize::<ServerFrame>(
+            &serialize(&ServerFrame {
+                messages: vec![server_frame::ChatMessage {
+                    kind: server_frame::ChatMessageKind::Broadcast,
+                    sender: String::from("hunter1"),
+                    text: String::from("Hello, world!"),
+                }],
             })
             .unwrap(),
         )
         .unwrap();
-
-        deserialize::<ServerMessage>(&serialize(&ServerMessage::Empty {}).unwrap()).unwrap();
     }
-
 }
