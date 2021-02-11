@@ -24,7 +24,7 @@ pub struct ChatMessage {
     pub text: String,
 }
 
-#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+#[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
 #[cfg_attr(
     feature = "json-schema",
     derive(schemars::JsonSchema),
