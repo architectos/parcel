@@ -1,4 +1,3 @@
-use glam::Vec3;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -33,7 +32,7 @@ pub struct ChatMessage {
 )]
 pub struct ServerFrame {
     pub messages: Vec<ChatMessage>,
-    pub position: Vec3,
+    pub position: [f32; 3],
     pub rotation: f32
 }
 
