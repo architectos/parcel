@@ -12,8 +12,6 @@ pub use server_frame::ServerFrame;
 
 #[cfg(test)]
 mod tests {
-    use std::time::Duration;
-
     use super::*;
     use bincode::{deserialize, serialize};
     use client_frame::Movement;
@@ -22,11 +20,6 @@ mod tests {
     fn test_client_message_serialize() -> () {
         serialize(&ClientFrame {
             id: 0,
-            timestamp: Duration::default().as_millis() as u64,
-            messages: vec![client_frame::ChatMessage {
-                receiver: client_frame::ChatReceiver::Broadcast,
-                text: String::from("Hello, world!"),
-            }],
             movement: Movement::default(),
             rotation: 0.0
         })
@@ -34,13 +27,6 @@ mod tests {
 
         serialize(&ClientFrame {
             id: 0,
-            timestamp: Duration::default().as_millis() as u64,
-            messages: vec![client_frame::ChatMessage {
-                receiver: client_frame::ChatReceiver::Direct {
-                    target: String::from("hunter2"),
-                },
-                text: String::from("Hello, world!"),
-            }],
             movement: Movement::default(),
             rotation: 0.0
         })
@@ -52,11 +38,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 id: 0,
-                timestamp: Duration::default().as_millis() as u64,
-                messages: vec![client_frame::ChatMessage {
-                    receiver: client_frame::ChatReceiver::Broadcast,
-                    text: String::from("Hello, world!"),
-                }],
+
                 movement: Movement::default(),
                 rotation: 0.0
             })
@@ -67,13 +49,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 id: 0,
-                timestamp: Duration::default().as_millis() as u64,
-                messages: vec![client_frame::ChatMessage {
-                    receiver: client_frame::ChatReceiver::Direct {
-                        target: String::from("hunter2"),
-                    },
-                    text: String::from("Hello, world!"),
-                }],
+
                 movement: Movement::default(),
                 rotation: 0.0
             })
@@ -86,12 +62,6 @@ mod tests {
     fn test_server_message_serialize() -> () {
         serialize(&ServerFrame {
             id: 0,
-            timestamp: Duration::default().as_millis() as u64,
-            messages: vec![server_frame::ChatMessage {
-                kind: server_frame::ChatMessageKind::Broadcast,
-                sender: String::from("hunter1"),
-                text: String::from("Hello, world!"),
-            }],
             position: [0.0, 0.0, 0.0],
             rotation: 0.0,
         })
@@ -103,12 +73,6 @@ mod tests {
         deserialize::<ServerFrame>(
             &serialize(&ServerFrame {
                 id: 0,
-                timestamp: Duration::default().as_millis() as u64,
-                messages: vec![server_frame::ChatMessage {
-                    kind: server_frame::ChatMessageKind::Broadcast,
-                    sender: String::from("hunter1"),
-                    text: String::from("Hello, world!"),
-                }],
                 position: [0.0, 0.0, 0.0],
                 rotation: 0.0,
             })
