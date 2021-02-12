@@ -13,6 +13,7 @@ pub use server_frame::ServerFrame;
 #[cfg(test)]
 mod tests {
     use super::*;
+    use glam::Vec3;
     use bincode::{deserialize, serialize};
     use client_frame::Movement;
 
@@ -24,6 +25,7 @@ mod tests {
                 text: String::from("Hello, world!"),
             }],
             movement: Movement::default(),
+            rotation: 0.0
         })
         .unwrap();
 
@@ -35,6 +37,7 @@ mod tests {
                 text: String::from("Hello, world!"),
             }],
             movement: Movement::default(),
+            rotation: 0.0
         })
         .unwrap();
     }
@@ -48,6 +51,7 @@ mod tests {
                     text: String::from("Hello, world!"),
                 }],
                 movement: Movement::default(),
+                rotation: 0.0
             })
             .unwrap(),
         )
@@ -62,6 +66,7 @@ mod tests {
                     text: String::from("Hello, world!"),
                 }],
                 movement: Movement::default(),
+                rotation: 0.0
             })
             .unwrap(),
         )
@@ -76,6 +81,8 @@ mod tests {
                 sender: String::from("hunter1"),
                 text: String::from("Hello, world!"),
             }],
+            position: Vec3::zero(),
+            rotation: 0.0,
         })
         .unwrap();
     }
@@ -89,6 +96,8 @@ mod tests {
                     sender: String::from("hunter1"),
                     text: String::from("Hello, world!"),
                 }],
+                position: Vec3::zero(),
+                rotation: 0.0,
             })
             .unwrap(),
         )

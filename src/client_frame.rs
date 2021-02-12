@@ -44,4 +44,5 @@ pub struct Movement {
 pub struct ClientFrame {
     pub messages: Vec<ChatMessage>,
     pub movement: Movement,
+    pub rotation: f32
 }
