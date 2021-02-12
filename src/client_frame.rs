@@ -42,6 +42,8 @@ pub struct Movement {
     schemars(deny_unknown_fields)
 )]
 pub struct ClientFrame {
+    pub id: u64,
+    pub timestamp: u64,
     pub messages: Vec<ChatMessage>,
     pub movement: Movement,
     pub rotation: f32

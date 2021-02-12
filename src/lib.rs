@@ -12,6 +12,8 @@ pub use server_frame::ServerFrame;
 
 #[cfg(test)]
 mod tests {
+    use std::time::Duration;
+
     use super::*;
     use bincode::{deserialize, serialize};
     use client_frame::Movement;
@@ -19,6 +21,7 @@ mod tests {
     #[test]
     fn test_client_message_serialize() -> () {
         serialize(&ClientFrame {
+            id: 0,
             messages: vec![client_frame::ChatMessage {
                 receiver: client_frame::ChatReceiver::Broadcast,
                 text: String::from("Hello, world!"),
@@ -29,6 +32,7 @@ mod tests {
         .unwrap();
 
         serialize(&ClientFrame {
+            id: 0,
             messages: vec![client_frame::ChatMessage {
                 receiver: client_frame::ChatReceiver::Direct {
                     target: String::from("hunter2"),
@@ -45,6 +49,7 @@ mod tests {
     fn test_client_message_deserialize() -> () {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
+                id: 0,
                 messages: vec![client_frame::ChatMessage {
                     receiver: client_frame::ChatReceiver::Broadcast,
                     text: String::from("Hello, world!"),
@@ -58,6 +63,7 @@ mod tests {
 
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
+                id: 0,
                 messages: vec![client_frame::ChatMessage {
                     receiver: client_frame::ChatReceiver::Direct {
                         target: String::from("hunter2"),
@@ -75,6 +81,8 @@ mod tests {
     #[test]
     fn test_server_message_serialize() -> () {
         serialize(&ServerFrame {
+            id: 0,
+            timestamp: Duration::default().as_millis() as u64,
             messages: vec![server_frame::ChatMessage {
                 kind: server_frame::ChatMessageKind::Broadcast,
                 sender: String::from("hunter1"),
@@ -90,6 +98,8 @@ mod tests {
     fn test_server_message_deserialize() -> () {
         deserialize::<ServerFrame>(
             &serialize(&ServerFrame {
+                id: 0,
+                timestamp: Duration::default().as_millis() as u64,
                 messages: vec![server_frame::ChatMessage {
                     kind: server_frame::ChatMessageKind::Broadcast,
                     sender: String::from("hunter1"),

@@ -31,6 +31,8 @@ pub struct ChatMessage {
     schemars(deny_unknown_fields)
 )]
 pub struct ServerFrame {
+    pub id: u64,
+    pub timestamp: u64,
     pub messages: Vec<ChatMessage>,
     pub position: [f32; 3],
     pub rotation: f32
