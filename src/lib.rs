@@ -22,6 +22,7 @@ mod tests {
     fn test_client_message_serialize() -> () {
         serialize(&ClientFrame {
             id: 0,
+            timestamp: Duration::default().as_millis() as u64,
             messages: vec![client_frame::ChatMessage {
                 receiver: client_frame::ChatReceiver::Broadcast,
                 text: String::from("Hello, world!"),
@@ -33,6 +34,7 @@ mod tests {
 
         serialize(&ClientFrame {
             id: 0,
+            timestamp: Duration::default().as_millis() as u64,
             messages: vec![client_frame::ChatMessage {
                 receiver: client_frame::ChatReceiver::Direct {
                     target: String::from("hunter2"),
@@ -50,6 +52,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 id: 0,
+                timestamp: Duration::default().as_millis() as u64,
                 messages: vec![client_frame::ChatMessage {
                     receiver: client_frame::ChatReceiver::Broadcast,
                     text: String::from("Hello, world!"),
@@ -64,6 +67,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 id: 0,
+                timestamp: Duration::default().as_millis() as u64,
                 messages: vec![client_frame::ChatMessage {
                     receiver: client_frame::ChatReceiver::Direct {
                         target: String::from("hunter2"),
