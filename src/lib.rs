@@ -12,6 +12,8 @@ pub use server_frame::ServerFrame;
 
 #[cfg(test)]
 mod tests {
+    use crate::server_frame::Transform;
+
     use super::*;
     use bincode::{deserialize, serialize};
     use client_frame::Movement;
@@ -19,16 +21,16 @@ mod tests {
     #[test]
     fn test_client_message_serialize() -> () {
         serialize(&ClientFrame {
-            id: 0,
+            seq: 0,
             movement: Movement::default(),
-            rotation: 0.0
+            rotation: 0.0,
         })
         .unwrap();
 
         serialize(&ClientFrame {
-            id: 0,
+            seq: 0,
             movement: Movement::default(),
-            rotation: 0.0
+            rotation: 0.0,
         })
         .unwrap();
     }
@@ -37,10 +39,10 @@ mod tests {
     fn test_client_message_deserialize() -> () {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
-                id: 0,
+                seq: 0,
 
                 movement: Movement::default(),
-                rotation: 0.0
+                rotation: 0.0,
             })
             .unwrap(),
         )
@@ -48,10 +50,10 @@ mod tests {
 
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
-                id: 0,
+                seq: 0,
 
                 movement: Movement::default(),
-                rotation: 0.0
+                rotation: 0.0,
             })
             .unwrap(),
         )
@@ -61,9 +63,13 @@ mod tests {
     #[test]
     fn test_server_message_serialize() -> () {
         serialize(&ServerFrame {
-            id: 0,
-            position: [0.0, 0.0, 0.0],
-            rotation: 0.0,
+            seq: 0,
+            transform: Transform {
+                translation: [0.0, 0.0, 0.0],
+                rotation: 0.0,
+                scale: 0.0,
+            },
+            players: Vec::new(),
         })
         .unwrap();
     }
@@ -72,9 +78,13 @@ mod tests {
     fn test_server_message_deserialize() -> () {
         deserialize::<ServerFrame>(
             &serialize(&ServerFrame {
-                id: 0,
-                position: [0.0, 0.0, 0.0],
-                rotation: 0.0,
+                seq: 0,
+                transform: Transform {
+                    translation: [0.0, 0.0, 0.0],
+                    rotation: 0.0,
+                    scale: 0.0,
+                },
+                players: Vec::new(),
             })
             .unwrap(),
         )

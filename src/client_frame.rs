@@ -20,7 +20,7 @@ pub struct Movement {
     schemars(deny_unknown_fields)
 )]
 pub struct ClientFrame {
-    pub id: u64,
+    pub seq: u64,
     pub movement: Movement,
-    pub rotation: f32
+    pub rotation: f32,
 }
