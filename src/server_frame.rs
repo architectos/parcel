@@ -23,6 +23,20 @@ pub struct Transform {
     pub scale: f32,
 }
 
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+#[cfg_attr(feature = "json-schema", derive(schemars::JsonSchema))]
+pub enum Flow {
+    Normal,
+    Overflow,
+    Underflow,
+}
+
+impl Default for Flow {
+    fn default() -> Self {
+        Self::Normal
+    }
+}
+
 #[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
 #[cfg_attr(
     feature = "json-schema",
@@ -31,6 +45,7 @@ pub struct Transform {
 )]
 pub struct ServerFrame {
     pub seq: u64,
+    pub flow: Flow,
     pub transform: Transform,
     pub players: Vec<Player>,
 }

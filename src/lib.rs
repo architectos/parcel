@@ -64,6 +64,7 @@ mod tests {
     fn test_server_message_serialize() -> () {
         serialize(&ServerFrame {
             seq: 0,
+            flow: server_frame::Flow::Normal,
             transform: Transform {
                 translation: [0.0, 0.0, 0.0],
                 rotation: 0.0,
@@ -79,6 +80,7 @@ mod tests {
         deserialize::<ServerFrame>(
             &serialize(&ServerFrame {
                 seq: 0,
+                flow: server_frame::Flow::Normal,
                 transform: Transform {
                     translation: [0.0, 0.0, 0.0],
                     rotation: 0.0,
