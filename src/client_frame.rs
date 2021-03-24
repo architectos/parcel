@@ -22,5 +22,5 @@ pub struct Movement {
 pub struct ClientFrame {
     pub seq: u64,
     pub movement: Movement,
-    pub rotation: f32,
+    pub orientation: f32,
 }

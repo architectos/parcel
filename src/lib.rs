@@ -23,14 +23,14 @@ mod tests {
         serialize(&ClientFrame {
             seq: 0,
             movement: Movement::default(),
-            rotation: 0.0,
+            orientation: 0.0,
         })
         .unwrap();
 
         serialize(&ClientFrame {
             seq: 0,
             movement: Movement::default(),
-            rotation: 0.0,
+            orientation: 0.0,
         })
         .unwrap();
     }
@@ -42,7 +42,7 @@ mod tests {
                 seq: 0,
 
                 movement: Movement::default(),
-                rotation: 0.0,
+                orientation: 0.0,
             })
             .unwrap(),
         )
@@ -53,7 +53,7 @@ mod tests {
                 seq: 0,
 
                 movement: Movement::default(),
-                rotation: 0.0,
+                orientation: 0.0,
             })
             .unwrap(),
         )
