@@ -18,7 +18,7 @@ pub struct Player {
     schemars(deny_unknown_fields)
 )]
 pub struct Transform {
-    pub translation: [f32; 3],
+    pub position: [f32; 3],
     pub rotation: f32,
     pub scale: f32,
 }
@@ -46,6 +46,7 @@ impl Default for Flow {
 pub struct ServerFrame {
     pub seq: u64,
     pub flow: Flow,
+    pub orientation: f32,
     pub transform: Transform,
     pub players: Vec<Player>,
 }

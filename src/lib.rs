@@ -65,8 +65,9 @@ mod tests {
         serialize(&ServerFrame {
             seq: 0,
             flow: server_frame::Flow::Normal,
+            orientation: 0.0,
             transform: Transform {
-                translation: [0.0, 0.0, 0.0],
+                position: [0.0, 0.0, 0.0],
                 rotation: 0.0,
                 scale: 0.0,
             },
@@ -81,8 +82,9 @@ mod tests {
             &serialize(&ServerFrame {
                 seq: 0,
                 flow: server_frame::Flow::Normal,
+                orientation: 0.0,
                 transform: Transform {
-                    translation: [0.0, 0.0, 0.0],
+                    position: [0.0, 0.0, 0.0],
                     rotation: 0.0,
                     scale: 0.0,
                 },
