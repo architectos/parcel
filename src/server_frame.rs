@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
+#[serde(rename_all = "camelCase")]
 #[cfg_attr(
     feature = "json-schema",
     derive(schemars::JsonSchema),
@@ -12,6 +13,7 @@ pub struct Player {
 }
 
 #[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
+#[serde(rename_all = "camelCase")]
 #[cfg_attr(
     feature = "json-schema",
     derive(schemars::JsonSchema),
@@ -21,6 +23,17 @@ pub struct Transform {
     pub position: [f32; 3],
     pub rotation: f32,
     pub scale: f32,
+}
+
+#[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(
+    feature = "json-schema",
+    derive(schemars::JsonSchema),
+    schemars(deny_unknown_fields)
+)]
+pub struct Attributes {
+    pub movement_speed: f32,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -38,6 +51,7 @@ impl Default for Flow {
 }
 
 #[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
+#[serde(rename_all = "camelCase")]
 #[cfg_attr(
     feature = "json-schema",
     derive(schemars::JsonSchema),
@@ -46,7 +60,7 @@ impl Default for Flow {
 pub struct ServerFrame {
     pub seq: u64,
     pub flow: Flow,
-    pub orientation: f32,
+    pub attributes: Attributes,
     pub transform: Transform,
     pub players: Vec<Player>,
 }

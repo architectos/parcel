@@ -16,21 +16,18 @@ mod tests {
 
     use super::*;
     use bincode::{deserialize, serialize};
-    use client_frame::Movement;
 
     #[test]
     fn test_client_message_serialize() -> () {
         serialize(&ClientFrame {
             seq: 0,
-            movement: Movement::default(),
-            orientation: 0.0,
+            displacement: [0.0, 0.0],
         })
         .unwrap();
 
         serialize(&ClientFrame {
             seq: 0,
-            movement: Movement::default(),
-            orientation: 0.0,
+            displacement: [0.0, 0.0],
         })
         .unwrap();
     }
@@ -40,9 +37,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 seq: 0,
-
-                movement: Movement::default(),
-                orientation: 0.0,
+                displacement: [0.0, 0.0],
             })
             .unwrap(),
         )
@@ -51,9 +46,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 seq: 0,
-
-                movement: Movement::default(),
-                orientation: 0.0,
+                displacement: [0.0, 0.0],
             })
             .unwrap(),
         )
@@ -65,7 +58,9 @@ mod tests {
         serialize(&ServerFrame {
             seq: 0,
             flow: server_frame::Flow::Normal,
-            orientation: 0.0,
+            attributes: server_frame::Attributes {
+                movement_speed: 0.0,
+            },
             transform: Transform {
                 position: [0.0, 0.0, 0.0],
                 rotation: 0.0,
@@ -82,7 +77,9 @@ mod tests {
             &serialize(&ServerFrame {
                 seq: 0,
                 flow: server_frame::Flow::Normal,
-                orientation: 0.0,
+                attributes: server_frame::Attributes {
+                    movement_speed: 0.0,
+                },
                 transform: Transform {
                     position: [0.0, 0.0, 0.0],
                     rotation: 0.0,
