@@ -61,7 +61,7 @@ impl Default for Flow {
 pub struct ServerFrame {
     pub seq: u64,
     pub flow: Flow,
-    pub player: Player,
+    pub player_id: u64,
     pub players: Vec<Player>,
 }
 

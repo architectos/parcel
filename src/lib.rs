@@ -58,17 +58,7 @@ mod tests {
         serialize(&ServerFrame {
             seq: 0,
             flow: server_frame::Flow::Normal,
-            player: Player {
-                id: 0,
-                attributes: server_frame::Attributes {
-                    movement_speed: 0.0,
-                },
-                transform: Transform {
-                    position: [0.0, 0.0, 0.0],
-                    rotation: 0.0,
-                    scale: 0.0,
-                },
-            },
+            player_id: 0,
             players: Vec::new(),
         })
         .unwrap();
@@ -80,17 +70,7 @@ mod tests {
             &serialize(&ServerFrame {
                 seq: 0,
                 flow: server_frame::Flow::Normal,
-                player: Player {
-                    id: 0,
-                    attributes: server_frame::Attributes {
-                        movement_speed: 0.0,
-                    },
-                    transform: Transform {
-                        position: [0.0, 0.0, 0.0],
-                        rotation: 0.0,
-                        scale: 0.0,
-                    },
-                },
+                player_id: 0,
                 players: Vec::new(),
             })
             .unwrap(),
