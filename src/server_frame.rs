@@ -7,18 +7,6 @@ use serde::{Deserialize, Serialize};
     derive(schemars::JsonSchema),
     schemars(deny_unknown_fields)
 )]
-pub struct Player {
-    id: String,
-    transform: Transform,
-}
-
-#[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
-#[serde(rename_all = "camelCase")]
-#[cfg_attr(
-    feature = "json-schema",
-    derive(schemars::JsonSchema),
-    schemars(deny_unknown_fields)
-)]
 pub struct Transform {
     pub position: [f32; 3],
     pub rotation: f32,
@@ -34,6 +22,19 @@ pub struct Transform {
 )]
 pub struct Attributes {
     pub movement_speed: f32,
+}
+
+#[derive(Clone, Default, Serialize, Deserialize, PartialEq, Debug)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(
+    feature = "json-schema",
+    derive(schemars::JsonSchema),
+    schemars(deny_unknown_fields)
+)]
+pub struct Player {
+    id: String,
+    transform: Transform,
+    attributes: Attributes,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
