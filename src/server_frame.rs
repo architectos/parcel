@@ -37,7 +37,7 @@ pub struct Player {
     pub attributes: Attributes,
 }
 
-#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+#[derive(Clone, Copy, Serialize, Deserialize, PartialEq, Debug)]
 #[cfg_attr(feature = "json-schema", derive(schemars::JsonSchema))]
 pub enum Flow {
     Normal,
