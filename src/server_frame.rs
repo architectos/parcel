@@ -32,9 +32,9 @@ pub struct Attributes {
     schemars(deny_unknown_fields)
 )]
 pub struct Player {
-    id: String,
-    transform: Transform,
-    attributes: Attributes,
+    pub id: u64,
+    pub transform: Transform,
+    pub attributes: Attributes,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -61,8 +61,7 @@ impl Default for Flow {
 pub struct ServerFrame {
     pub seq: u64,
     pub flow: Flow,
-    pub attributes: Attributes,
-    pub transform: Transform,
+    pub player: Player,
     pub players: Vec<Player>,
 }
 

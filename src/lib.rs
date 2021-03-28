@@ -12,7 +12,7 @@ pub use server_frame::ServerFrame;
 
 #[cfg(test)]
 mod tests {
-    use crate::server_frame::Transform;
+    use crate::server_frame::{Player, Transform};
 
     use super::*;
     use bincode::{deserialize, serialize};
@@ -58,13 +58,16 @@ mod tests {
         serialize(&ServerFrame {
             seq: 0,
             flow: server_frame::Flow::Normal,
-            attributes: server_frame::Attributes {
-                movement_speed: 0.0,
-            },
-            transform: Transform {
-                position: [0.0, 0.0, 0.0],
-                rotation: 0.0,
-                scale: 0.0,
+            player: Player {
+                id: 0,
+                attributes: server_frame::Attributes {
+                    movement_speed: 0.0,
+                },
+                transform: Transform {
+                    position: [0.0, 0.0, 0.0],
+                    rotation: 0.0,
+                    scale: 0.0,
+                },
             },
             players: Vec::new(),
         })
@@ -77,13 +80,16 @@ mod tests {
             &serialize(&ServerFrame {
                 seq: 0,
                 flow: server_frame::Flow::Normal,
-                attributes: server_frame::Attributes {
-                    movement_speed: 0.0,
-                },
-                transform: Transform {
-                    position: [0.0, 0.0, 0.0],
-                    rotation: 0.0,
-                    scale: 0.0,
+                player: Player {
+                    id: 0,
+                    attributes: server_frame::Attributes {
+                        movement_speed: 0.0,
+                    },
+                    transform: Transform {
+                        position: [0.0, 0.0, 0.0],
+                        rotation: 0.0,
+                        scale: 0.0,
+                    },
                 },
                 players: Vec::new(),
             })
