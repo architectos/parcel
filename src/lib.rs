@@ -12,7 +12,7 @@ pub use server_frame::ServerFrame;
 
 #[cfg(test)]
 mod tests {
-    use crate::server_frame::{Player, Transform};
+    use crate::server_frame::{Attributes, Player, Transform};
 
     use super::*;
     use bincode::{deserialize, serialize};
@@ -58,7 +58,11 @@ mod tests {
         serialize(&ServerFrame {
             seq: 0,
             flow: server_frame::Flow::Normal,
-            player_id: 0,
+            player: Player {
+                id: 0,
+                transform: Transform::default(),
+                attributes: Attributes::default(),
+            },
             players: Vec::new(),
         })
         .unwrap();
@@ -70,7 +74,11 @@ mod tests {
             &serialize(&ServerFrame {
                 seq: 0,
                 flow: server_frame::Flow::Normal,
-                player_id: 0,
+                player: Player {
+                    id: 0,
+                    transform: Transform::default(),
+                    attributes: Attributes::default(),
+                },
                 players: Vec::new(),
             })
             .unwrap(),
