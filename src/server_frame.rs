@@ -60,6 +60,7 @@ impl Default for Flow {
 )]
 pub struct ServerFrame {
     pub seq: u64,
+    pub timestamp: u64,
     pub flow: Flow,
     pub player: Player,
     pub players: Vec<Player>,

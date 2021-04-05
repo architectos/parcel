@@ -8,5 +8,6 @@ use serde::{Deserialize, Serialize};
 )]
 pub struct ClientFrame {
     pub seq: u64,
+    pub timestamp: u64,
     pub displacement: [f32; 2],
 }

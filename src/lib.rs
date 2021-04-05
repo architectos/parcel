@@ -21,12 +21,14 @@ mod tests {
     fn test_client_message_serialize() -> () {
         serialize(&ClientFrame {
             seq: 0,
+            timestamp: 0,
             displacement: [0.0, 0.0],
         })
         .unwrap();
 
         serialize(&ClientFrame {
             seq: 0,
+            timestamp: 0,
             displacement: [0.0, 0.0],
         })
         .unwrap();
@@ -37,6 +39,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 seq: 0,
+                timestamp: 0,
                 displacement: [0.0, 0.0],
             })
             .unwrap(),
@@ -46,6 +49,7 @@ mod tests {
         deserialize::<ClientFrame>(
             &serialize(&ClientFrame {
                 seq: 0,
+                timestamp: 0,
                 displacement: [0.0, 0.0],
             })
             .unwrap(),
@@ -57,6 +61,7 @@ mod tests {
     fn test_server_message_serialize() -> () {
         serialize(&ServerFrame {
             seq: 0,
+            timestamp: 0,
             flow: server_frame::Flow::Normal,
             player: Player {
                 id: 0,
@@ -73,6 +78,7 @@ mod tests {
         deserialize::<ServerFrame>(
             &serialize(&ServerFrame {
                 seq: 0,
+                timestamp: 0,
                 flow: server_frame::Flow::Normal,
                 player: Player {
                     id: 0,
