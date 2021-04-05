@@ -32,7 +32,7 @@ pub struct Attributes {
     schemars(deny_unknown_fields)
 )]
 pub struct Player {
-    pub id: u64,
+    pub id: u32,
     pub transform: Transform,
     pub attributes: Attributes,
 }
